@@ -8,13 +8,11 @@ import customerRoutes from "./routes/customerRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import shopifyRoutes from "./routes/shopifyRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-import dashboardRoutes from "./routes/dashboardRoutes.js";
-
 
 // 🟢 Check if dashboardRoutes exists before importing
-let dashboardRoute;
+let dashboardRoutes;
 try {
-  dashboardRoute = (await import("./routes/dashboardRoutes.js")).default;
+  dashboardRoutes = (await import("./routes/dashboardRoutes.js")).default;
 } catch (err) {
   console.warn("⚠️ dashboardRoutes.js not found, skipping dashboard endpoints");
 }
@@ -22,10 +20,21 @@ try {
 dotenv.config();
 const app = express();
 
-// Middleware
+// ✅ Allow both localhost (dev) & Netlify (prod)
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://our-shopify.netlify.app"
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000", // frontend URL
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true, // allow cookies/session
   })
 );
@@ -38,9 +47,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/shopify", shopifyRoutes);
-app.use("/api/dashboard", dashboardRoutes);
 
-
+if (dashboardRoutes) {
+  app.use("/api/dashboard", dashboardRoutes);
+}
 
 const PORT = process.env.PORT || 5000;
 
@@ -49,10 +59,7 @@ const PORT = process.env.PORT || 5000;
     await sequelize.authenticate();
     console.log("✅ Database connected successfully!");
 
-    // ❌ Don't use force: true, it wipes tables
-    // ✅ Use alter: true only if you need schema updates
-    await sequelize.sync({ alter: true });  
-
+    await sequelize.sync({ alter: true }); // ⚠️ alter only if schema changes needed
     console.log("📦 Database & tables synced!");
 
     app.listen(PORT, () => {
