@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://shopify-backend-8ft6.onrender.com/api/";
 
 // Create Axios instance
 const api = axios.create({
