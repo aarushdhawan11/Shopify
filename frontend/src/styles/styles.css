@@ -1,0 +1,126 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-container {
+  width: 400px;
+  margin: 80px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 12px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-container button:hover {
+  background: #005bb5;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.link-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.link {
+  color: #0077ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.dashboard-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4d4f;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #d9363e;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.metric-box {
+  background: #0077ff;
+  color: white;
+  flex: 1;
+  margin: 5px;
+  padding: 25px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.chart-container, .top-customers {
+  margin-top: 30px;
+}
+
+.top-customers ul {
+  list-style: none;
+  padding: 0;
+}
+
+.top-customers li {
+  padding: 8px 12px;
+  background: #f0f2f5;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
