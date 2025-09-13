@@ -11,10 +11,15 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
     logging: console.log,
+    dialectOptions: {
+      ssl: {
+        require: true,       // Render Postgres needs SSL
+        rejectUnauthorized: false // allow self-signed certs
+      }
+    }
   }
 );
 
-// Drop and recreate tables automatically (development only!)
 sequelize.sync({ force: true })
   .then(() => console.log("✅ Tables recreated"))
   .catch(err => console.error("❌ Error syncing DB:", err));
