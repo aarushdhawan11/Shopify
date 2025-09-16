@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const SHOPIFY_STORE = process.env.SHOPIFY_STORE_URL; // ✅ Correct
+const SHOPIFY_STORE = process.env.SHOPIFY_STORE_URL; 
 const SHOPIFY_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
 
 export const getShopifyProducts = async () => {

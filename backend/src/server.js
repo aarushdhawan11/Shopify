@@ -9,7 +9,6 @@ import orderRoutes from "./routes/orderRoutes.js";
 import shopifyRoutes from "./routes/shopifyRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 
-// 🟢 Check if dashboardRoutes exists before importing
 let dashboardRoutes;
 try {
   dashboardRoutes = (await import("./routes/dashboardRoutes.js")).default;
@@ -20,7 +19,6 @@ try {
 dotenv.config();
 const app = express();
 
-// ✅ Allow both localhost (dev) & Netlify (prod)
 const allowedOrigins = [
   "http://localhost:3000",
   "https://our-shopify.netlify.app"
@@ -35,13 +33,13 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // allow cookies/session
+    credentials: true, 
   })
 );
 
 app.use(express.json());
 
-// Routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/customers", customerRoutes);
@@ -59,7 +57,7 @@ const PORT = process.env.PORT || 5000;
     await sequelize.authenticate();
     console.log("✅ Database connected successfully!");
 
-    await sequelize.sync({ alter: true }); // ⚠️ alter only if schema changes needed
+    await sequelize.sync({ alter: true }); 
     console.log("📦 Database & tables synced!");
 
     app.listen(PORT, () => {

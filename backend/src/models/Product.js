@@ -6,7 +6,7 @@ const Product = sequelize.define('Product', {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    field: 'shopify_id'   // 👈 ensures correct column name
+    field: 'shopify_id'   
   },
   title: {
     type: DataTypes.STRING,
@@ -19,10 +19,10 @@ const Product = sequelize.define('Product', {
   inventoryQuantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'inventory_quantity' // 👈 ensures correct column name
+    field: 'inventory_quantity' 
   }
 }, {
-  tableName: 'Products', // Sequelize will use exactly this table
+  tableName: 'Products', 
   timestamps: true
 });
 

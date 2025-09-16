@@ -1,7 +1,6 @@
-// src/controllers/dashboardController.js
-import shopify from "../shopify.js"; // use the axios instance
+import shopify from "../shopify.js"; 
 
-// GET /api/dashboard?start=YYYY-MM-DD&end=YYYY-MM-DD
+
 export const getDashboard = async (req, res) => {
   try {
     const { start, end } = req.query;
@@ -10,7 +9,6 @@ export const getDashboard = async (req, res) => {
       dateQuery = `&created_at_min=${start}T00:00:00-00:00&created_at_max=${end}T23:59:59-00:00`;
     }
 
-    // Fetch data from Shopify
     const [customersRes, productsRes, ordersRes] = await Promise.all([
       shopify.get("/customers.json"),
       shopify.get("/products.json"),
@@ -21,7 +19,6 @@ export const getDashboard = async (req, res) => {
     const products = productsRes.data.products || [];
     const orders = ordersRes.data.orders || [];
 
-    // Calculate top customers by total spent
     const customerTotals = {};
     orders.forEach((order) => {
       const email = order.customer?.email;

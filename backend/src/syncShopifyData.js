@@ -15,7 +15,7 @@ const syncData = async () => {
       getShopifyOrders(),
     ]);
 
-    // Sync Products
+    
     for (const p of products) {
       await product.upsert({
         shopifyId: p.id,
@@ -25,7 +25,6 @@ const syncData = async () => {
       });
     }
 
-    // Sync Customers
     for (const c of customers) {
       await customer.upsert({
         shopifyId: c.id,
@@ -38,7 +37,6 @@ const syncData = async () => {
       });
     }
 
-    // Sync Orders
     for (const o of orders) {
       await order.upsert({
         shopifyId: o.id,

@@ -1,9 +1,9 @@
-// controllers/authController.js
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js"; // Your Sequelize User model
+import User from "../models/User.js"; 
 
-// REGISTER
+
 export const registerUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -31,7 +31,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// LOGIN
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;

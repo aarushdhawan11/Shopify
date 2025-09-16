@@ -13,8 +13,8 @@ const sequelize = new Sequelize(
     logging: console.log,
     dialectOptions: {
       ssl: {
-        require: true,       // Render Postgres needs SSL
-        rejectUnauthorized: false // allow self-signed certs
+        require: true,       
+        rejectUnauthorized: false 
       }
     }
   }

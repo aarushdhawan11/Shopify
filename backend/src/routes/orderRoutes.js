@@ -1,13 +1,12 @@
 import express from "express";
-import shopify from "../shopify.js"; // your Shopify API helper
-import { authenticate } from "../middleware/authMiddleware.js"; // 🔒 JWT middleware
+import shopify from "../shopify.js"; 
+import { authenticate } from "../middleware/authMiddleware.js"; 
 
 const router = express.Router();
 
-// ✅ Get all orders from Shopify (protected)
 router.get("/", authenticate, async (req, res) => {
   try {
-    const response = await shopify.get("/orders.json?status=any"); // fetch all orders
+    const response = await shopify.get("/orders.json?status=any"); 
     res.json(response.data.orders);
   } catch (err) {
     console.error("Error fetching orders:", err.message);
@@ -15,7 +14,7 @@ router.get("/", authenticate, async (req, res) => {
   }
 });
 
-// ✅ Get order by ID from Shopify (protected)
+
 router.get("/:id", authenticate, async (req, res) => {
   try {
     const response = await shopify.get(`/orders/${req.params.id}.json`);
@@ -26,11 +25,9 @@ router.get("/:id", authenticate, async (req, res) => {
   }
 });
 
-// ➕ Create a new order in Shopify (protected)
 router.post("/", authenticate, async (req, res) => {
   try {
     const { customer_id, line_items } = req.body; 
-    // line_items: [{ variant_id: 12345, quantity: 2 }, ...]
 
     if (!customer_id || !line_items || !line_items.length) {
       return res.status(400).json({ error: "customer_id and line_items are required" });
@@ -40,7 +37,7 @@ router.post("/", authenticate, async (req, res) => {
       order: {
         customer: { id: customer_id },
         line_items,
-        financial_status: "paid", // optional, adjust as needed
+        financial_status: "paid", 
       },
     };
 

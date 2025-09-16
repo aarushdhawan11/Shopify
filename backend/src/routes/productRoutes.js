@@ -1,10 +1,9 @@
 import express from "express";
-import shopify from "../shopify.js"; // Shopify helper
+import shopify from "../shopify.js"; 
 import { authenticate } from "../middleware/authMiddleware.js"; // 🔒 JWT middleware
 
 const router = express.Router();
 
-// ✅ Get all products from Shopify (protected)
 router.get("/", authenticate, async (req, res) => {
   try {
     const response = await shopify.get("/products.json");
@@ -15,7 +14,6 @@ router.get("/", authenticate, async (req, res) => {
   }
 });
 
-// ✅ Add a new product to Shopify (protected)
 router.post("/", authenticate, async (req, res) => {
   try {
     const { name, price } = req.body;
